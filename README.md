@@ -5,18 +5,18 @@ Procédure d'installation d'un serveur web sous débian 8 (jessie)
 
 1. Mise à jours des paquets
 	```bash
-	$ aptitude update
-	$ aptitude upgrade
+	$ apt-get update
+	$ apt-get upgrade
 	```
 	
 2. Installation de certains outils
 	```bash
-	$ aptitude install git vim htop curl sudo -y
+	$ apt-get install git htop curl sudo -y
 	```
 	
 3. Mise à jour de NTP (horloge système)
 	```bash
-	$ aptitude install ntp ntpdate -y
+	$ apt-get install ntp ntpdate -y
 	$ sudo service ntp stop
 	$ ntpdate 0.fr.pool.ntp.org # mise à jour de la date et heure FR
 	$ sudo nano /etc/ntp.conf
@@ -49,7 +49,7 @@ Procédure d'installation d'un serveur web sous débian 8 (jessie)
 
 3. Sécurisation des port avec un pare-feu avec UFW
 	```bash
-	$ aptitude install ufw
+	$ apt-get install ufw
 	```
 	```bash
 	# Commande de base UFW
@@ -68,67 +68,47 @@ Procédure d'installation d'un serveur web sous débian 8 (jessie)
 
 4. Fail2Ban
 	```bash
-	$ aptitude install fail2ban -y
+	$ apt-get install fail2ban -y
 	$ sudo nano /etc/fail2ban/jail.conf 
 	# activation des différents services utilisé sur le serveur
 	```
 
 ### Serveur web
 
-1. Installation d'Apache 2
+1. Installation de PHP7, MariaDB et Nginx
 	```bash
-	$ aptitude install apache2 apache2-doc apache2-mpm-prefork apache2-utils -y
-	$ a2enmod rewrite expires headers deflate 
+	$ apt-get install nginx mariadb-server php-fpm php-mysql -y
+	$ systemctl enable php7.0-fpm
 	```
 	
-2. Supprimer le vhost actuel
+2. Ajouter son vhost
 	```bash
 	$ cd /etc/apache2/sites-available
-	$ a2dissite 000-default.conf
+	$ sudo nano default
 	```
 
-3. Installation de PHP 5 et de ses librairies 
+3. Securité autour de Php
 	```bash
-	$ aptitude install libapache2-mod-php5 php5 php5-common php5-curl php5-dev php5-gd php5-imagick php5-imap php5-json php5-mcrypt php5-memcache php5-mhash php5-ming php5-mysql php5-pspell php5-sqlite php5-xsl -y
-	```
-
-4. Securité autour de Php
-	```bash
-	$ sudo nano /etc/php5/apache2/php.ini
+	$ sudo nano /etc/php/7.0/fpm/php.ini
 	```
 	```bash
 	# Cacher la version de PHP
 	expose_php = Off
-	# Augmenter la mémoire utilisée
+	# Augmenter la mémoire utilisée si besoin
 	memory_limit = 512M
-	# Utile pour l'import de grosses bases de données
-	post_max_size = 128M
+	post_max_size = 8M
 	# Ajouter le phpinfo avant les autres fonctions
 	disable_functions = phpinfo,...
 	```
 	```bash
-	sudo nano /etc/apache2/conf-enabled/security.conf
+	$ sudo nano /etc/nginx/nginx.conf
 	```
 	```bash
-	ServerTokens Prod # indique l'utilisation d'apache uniquement (sans version)
-	ServerSignature Off # masque la version apache en cas d'erreur serveur
-	TraceEnable Off # Désactive les requêtes de type TRACE
+	# supprimer le commentaire # pour désactiver le server_tokens
+	server_tokens off; # indique l'utilisation d'apache uniquement (sans version)
+	```
+	```bash
+	# reload nginx
+	$ systemctl reload nginx
 	```
 	
-5. On redémare enfin le serveur apache
-	```bash
-	sudo service apache2 restart
-	```
-
-6. Installation de MySQL
-	```bash
-	aptitude install mysql-server -y
-	# suivre les instructions 
-	```
-
-7. Installation de phpMyAdmin
-	```bash
-	$ aptitude install phpmyadmin -y
-	$ sudo ln -s /etc/phpmyadmin/apache.conf /etc/apache2/sites-enabled/phpmyadmin.conf
-	$ sudo service apache2 restart
-	```
