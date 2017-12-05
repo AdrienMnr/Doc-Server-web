@@ -1,3 +1,5 @@
+# Vhost Nginx pour Symfony 3
+```bash
 server {
   listen 80;
   server_name WWW.NAME_SITE.COM;
@@ -51,3 +53,4 @@ server {
     error_log /var/log/NAME_SITE_error.log;
     access_log /var/log/NAME_SITE_access.log;
 }
+```
