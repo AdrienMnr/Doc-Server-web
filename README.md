@@ -1,4 +1,4 @@
-Procédure d'installation d'un serveur web sous débian 8 (jessie)
+Procédure d'installation d'un serveur web sous débian 9 (Stretch)
 ================================================================
 
 ### Lancement des pré-requis
@@ -49,7 +49,7 @@ Procédure d'installation d'un serveur web sous débian 8 (jessie)
 
 3. Sécurisation des port avec un pare-feu avec UFW
 	```bash
-	$ apt-get install ufw
+	$ apt-get install ufw -y
 	```
 	```bash
 	# Commande de base UFW
@@ -70,7 +70,7 @@ Procédure d'installation d'un serveur web sous débian 8 (jessie)
 	```bash
 	$ apt-get install fail2ban -y
 	$ sudo nano /etc/fail2ban/jail.conf 
-	# activation des différents services utilisé sur le serveur
+	# activation des différents services utilisé sur le serveur fail2ban
 	```
 
 ### Serveur web
@@ -81,7 +81,7 @@ Procédure d'installation d'un serveur web sous débian 8 (jessie)
 	$ systemctl enable php7.0-fpm
 	```
 	
-2. Ajouter son vhost
+2. Ajouter son vhost Nginx
 	```bash
 	$ cd /etc/apache2/sites-available
 	$ sudo nano default
