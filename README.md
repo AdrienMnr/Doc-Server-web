@@ -77,7 +77,7 @@ Procédure d'installation d'un serveur web sous débian 9 (Stretch)
 
 1. Installation de PHP7, MariaDB et Nginx
 	```bash
-	$ apt-get install nginx mariadb-server php-fpm php-mysql -y
+	$ apt-get install nginx mariadb-server php-fpm php-mysql php-xml php-zip -y
 	$ systemctl enable php7.0-fpm
 	```
 	
@@ -112,3 +112,8 @@ Procédure d'installation d'un serveur web sous débian 9 (Stretch)
 	$ systemctl reload nginx
 	```
 	
+4. Creation user bdd
+	```bash
+	$ mysql # connect to bdd
+	MariaDB []> CREATE USER 'NAME'@'localhost' IDENTIFIED BY 'PWD'
+	```	
