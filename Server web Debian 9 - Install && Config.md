@@ -83,7 +83,7 @@ Procédure d'installation d'un serveur web sous débian 9 (Stretch)
 	
 2. Ajouter son vhost Nginx
 	```bash
-	$ cd /etc/apache2/sites-available
+	$ cd /etc/nginx/sites-available
 	$ sudo nano default
 	```
 
@@ -116,4 +116,5 @@ Procédure d'installation d'un serveur web sous débian 9 (Stretch)
 	```bash
 	$ mysql # connect to bdd
 	MariaDB []> CREATE USER 'NAME'@'localhost' IDENTIFIED BY 'PWD'
+	MariaDB []> GRANT ALL PRIVILEGES ON NAME.* TO 'NAME'@'localhost';
 	```	
