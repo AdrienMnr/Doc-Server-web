@@ -1,18 +1,15 @@
 # Vhost Nginx pour Symfony 3
 ```bash
 server {
-  listen 80;
-  server_name WWW.NAME_SITE.COM;
-  rewrite ^/(.*) http://NAME_SITE.COM/$1 permanent;
+    listen 80;
+    server_name WWW.NAME_SITE.COM;
+    rewrite ^/(.*) http://NAME_SITE.COM/$1 permanent;
 }
 
 server {
-	listen 80;
-	server_name NAME_SITE.COM;
-	root /var/www/NAME_SITE/web;
-    location ~ /.well-known {
-                allow all;
-    }
+    listen 80;
+    server_name NAME_SITE.COM;
+    root /var/www/NAME_SITE/web;
     
     add_header Strict-Transport-Security max-age=15768000;
     add_header X-Frame-Options SAMEORIGIN;
@@ -26,7 +23,7 @@ server {
     }
     # PROD
     location ~ ^/app\.php(/|$) {
-        fastcgi_pass unix:/var/run/php/php7.0-fpm.sock;
+        fastcgi_pass unix:/var/run/php/php7.3-fpm.sock;
         fastcgi_split_path_info ^(.+\.php)(/.*)$;
         include fastcgi_params;
         # When you are using symlinks to link the document root to the
@@ -49,7 +46,7 @@ server {
     location ~ \.php$ {
       return 404;
     }
-    client_max_body_size 10m;
+    
     error_log /var/log/NAME_SITE_error.log;
     access_log /var/log/NAME_SITE_access.log;
 }
