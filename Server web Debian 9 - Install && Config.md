@@ -85,7 +85,7 @@ Procédure d'installation d'un serveur web sous débian 9 (Stretch)
 	$ sudo apt-get install nginx postgresql php-fpm php-pgsql php-zip -y
 	$ systemctl enable php7.0-fpm
 	```
-1BIS. Installation de PHP 7.3 PostgreSQL et Nginx
+1. BIS Installation de PHP 7.3 PostgreSQL et Nginx
 	```bash
 	# Ajout de la list Debian Sury pour avoir php73 dans les sources apt
 	$ sudo apt install ca-certificates apt-transport-https 
