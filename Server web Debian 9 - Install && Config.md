@@ -93,7 +93,7 @@ Procédure d'installation d'un serveur web sous débian 9 (Stretch)
 	$ echo "deb https://packages.sury.org/php/ stretch main" | sudo tee /etc/apt/sources.list.d/php.list
 	$ sudo apt-get update
 	# Installation de PHP 7.3 
-	$ sudo apt-get install php7.3-fpm php7.3-cli php7.3-common php7.3-curl php7.3-mbstring php7.3-pgsql php7.3-xml -y
+	$ sudo apt-get install php7.3-fpm php7.3-cli php7.3-common php7.3-curl php7.3-mbstring php7.3-pgsql php7.3-xml php7.3-zip -y
 	# Start PHP
 	$ systemctl enable php7.3-fpm
 	```
