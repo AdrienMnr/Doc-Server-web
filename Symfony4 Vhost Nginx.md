@@ -1,4 +1,4 @@
-# Vhost Nginx pour Symfony 3
+# Vhost Nginx pour Symfony 4
 ```bash
 server {
     listen 80;
