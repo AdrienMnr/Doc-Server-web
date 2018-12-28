@@ -1,4 +1,4 @@
-Suchweb install & config Syfmony3
+Install & config Syfmony 4
 ================
 
 ### Install vendors
