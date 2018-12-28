@@ -12,16 +12,23 @@ $ mv composer.phar /usr/local/bin/composer
 $ composer install --no-dev --optimize-autoloader
 ```
 
+### Fix permission
+```bash
+$ HTTPDUSER=$(ps axo user,comm | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1)
+$ sudo setfacl -dR -m u:"$HTTPDUSER":rwX -m u:$(whoami):rwX var
+$ sudo setfacl -R -m u:"$HTTPDUSER":rwX -m u:$(whoami):rwX var
+```
+
 ### Database setup
 ```bash
-$ php bin/console doctrine:database:create
+$ sudo php bin/console doctrine:database:create
 ```
 
 ### Yarn Install 
 ```bash
-$ curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
-$ apt-get install nodejs build-essential -y
-$ npm install -g yarn
-$ yarn install
-$ yarn run encore production
+$ curl -sL https://deb.nodesource.com/setup_11.x | sudo -E bash -
+$ sudo apt-get install nodejs -y
+$ sudo npm install -g yarn
+$ sudo yarn 
+$ sudo yarn run encore production
 ```
